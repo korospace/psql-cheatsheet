@@ -53,3 +53,9 @@
     <li><a href="6-manymore/README.md/#restore-database">restore database</a></li>
   </ul>
 </details>
+<details close="close">
+  <summary><a href="7-quiz/README.md/">quiz</a></summary>
+  <ul>
+    <li><a href="7-quiz/README.md/#quiz-1">quiz 1</a></li>
+  </ul>
+</details>

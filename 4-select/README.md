@@ -205,10 +205,10 @@ FROM employees;
     ```
 * LIKE
     ```sh
-    //
+    //any word that has the letter A as the first letter
     SELECT * from employees where first_name like 'A%';
 
-    //
+    //any word that has the letter L as the second letter
     SELECT * from employees where first_name like '_l%';
     ```
 <br />
@@ -264,6 +264,8 @@ SELECT
     CONACT(first_name, ' ', last_name) AS nama_lengkap
 FROM employees;
 ```
+<br>
+<a hrfe="https://youtube.dimas-maryanto.com/posts/rdbms/postgresql/010-single-row-function">documentation</a>
 <br>
 
 ## group by
@@ -430,3 +432,26 @@ FROM
     employees;
 ```
 <br>
+
+## sub query
+* select column
+    ```sh
+    SELECT
+        e.employee_id AS nik,
+        e.first_name  AS nama,
+        (SELECT j.job_title   FROM jobs j  WHERE j.job_id  = e.job_id) AS jabatan,
+        (SELECT j2.min_salary FROM jobs j2 WHERE j2.job_id = e.job_id) AS minimun_salary
+    FROM employees e
+    LIMIT 10;
+    ```
+* where clause
+    ```sh
+    SELECT
+        e.employee_id AS nik,
+        e.first_name  AS nama,
+        e.salary      AS gaji_sebulan
+    FROM employees e
+    WHERE  
+        e.salary > (select avg(j.max_salary) FROM jobs j)
+    LIMIT 10;
+    ```
