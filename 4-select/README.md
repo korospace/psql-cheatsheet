@@ -1,6 +1,6 @@
 
 <p align="center">
-    <h1 align="center">SELECT</h1>
+    <h1 align="center">SELECT DATA</h1>
     <p align="center">
         the syntax below is used to read data on table.<br />
         <a href="../README.md"><strong>« back to menu</strong></a>
@@ -12,119 +12,65 @@
 <details open="open">
   <summary>Table of Contents</summary>
   <ul>
-    <li><a href="#select-data">select data</a></li>
-    <li><a href="#where-clause">where clause</a></li>
-    <li><a href="#controll-flow">controll flow</a></li>
-    <li><a href="#agregat">agregat</a></li>
-    <li><a href="#join">join</a></li>
-    <li><a href="#union">union</a></li>
-    <li><a href="#group-by">group by</a></li>
-    <li><a href="#having-clause">having clause</a></li>
-    <li><a href="#sub-queries">sub queries</a></li>
+    <li><a href="#basic-select">basic select</a></li>
+    <li><a href="#alias">alias</a></li>
+    <li><a href="#arithmetic-operation">arithmetic operation</a></li>
   </ul>
 </details>
 
 ## select data
 * All column. 
     ```sh
-    SELECT * FROM products;
+    SELECT * FROM table_name;
     ```
     
 * specific column
     ```sh
-    SELECT product_id, name FROM products;
+    SELECT column_name,column_name FROM table_name
     ```
 
-* alias
+## alias
+* alias for column
     ```sh
-    SELECT p.product_id AS 'ID Produk', 
-           p.name       AS 'Produk name' 
-    FROM products AS p;
+    SELECT column_name AS bla_bla FROM table_name;
+    SELECT column_name AS "bla bla" FROM table_name;
+
+    or
+
+    SELECT column_name bla_bla FROM table_name;
+    SELECT column_name "bla bla" FROM table_name;
     ```
 
-* order by
+* alias for table
     ```sh
-    SELECT * FROM products 
-    ORDER BY price DESC;
-    ```
-    NOTE:  
-    - ASC is used to sort from smallest to largest
-    - DESC is used to sort from largest to smallest
+    SELECT tn.column_name FROM table_name AS tn;
 
-* limit
-    ```sh
-    SELECT * FROM products LIMIT {offset},{limit data};
-    ```
-    ```sh
-    SELECT * FROM products LIMIT 2,1;
-    ```
-    NOTE: _sql above syntax will display product data starting from row with index 2 and display only one data_
+    or
 
-* distinct <br/>
-    _This statement is used to remove redundant data at table_
-    ```sh
-    SELECT DISTINCT price FROM products;
+    SELECT tn.column_name FROM table_name tn;
     ```
-    | price(without distinct) | price(with distinct)|
-    | :---: | :---: |
-    | 10000 | 10000 |
-    | 10000 | 12000 |
-    | 10000 | 29000 |
-    | 10000 |
-    | 10000 |
-    | 10000 |
-    | 12000 |
-    | 29000 |
 
-* div <br/>
-    *The DIV function is used for integer division. more details: https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html*
+<br />
+
+## arithmetic operation
+* static data
     ```sh
-    SELECT price          AS 'without div', 
-           price div 1000 AS 'with div' 
-    FROM products;
+    SELECT 
+        2+2  AS penjumlahan, 
+        2-1  AS pengurangan, 
+        4/2  AS pembagian, 
+        2*2  AS perkalian, 
+        @ -5 AS real, 
+        3%2  AS mod;
     ```
-    | without div | with div |
-    |:---:        |:---:     |
-    |       10000 |       10 |
-    |       10000 |       10 |
-    |       10000 |       10 |
-    |       10000 |       10 |
-    |       10000 |       10 |
-    |       10000 |       10 |
-    |       12000 |       12 |
-    |       29000 |       29 |
-    
-* string function <br/>
-    *The STRING function is used to manipulate character string effectively. more details: https://dev.mysql.com/doc/refman/8.0/en/string-functions.html*
+
+* dynamic data
     ```sh
-    SELECT name, LOWER(name),UPPER(name),LENGTH(name) FROM products;
+    SELECT 
+        salary          AS gaji, 
+        salary*(30/100) AS "30% dari gaji" 
+    FROM employees;
     ```
-    | name | LOWER(name) | UPPER(name) | LENGTH(name) |
-    | :---: | :---: | :---: | :---: |
-    | Popcorn Creamello 150gram | popcorn creamello 150gram | POPCORN CREAMELLO 150GRAM |           25 |
-    | Tricks backed chips       | tricks backed chips       | TRICKS BACKED CHIPS       |           19 |
-    | Rondoleti wafer           | rondoleti wafer           | RONDOLETI WAFER           |           15 |
-    | Kripik pisang sale        | kripik pisang sale        | KRIPIK PISANG SALE        |           18 |
-    | Mie ayam pangsit          | mie ayam pangsit          | MIE AYAM PANGSIT          |           16 |
-    | Mie ayam bakso            | mie ayam bakso            | MIE AYAM BAKSO            |           14 |
-    | Mie ayam pangsit+bakso    | mie ayam pangsit+bakso    | MIE AYAM PANGSIT+BAKSO    |           22 |
-    | Seblak original           | seblak original           | SEBLAK ORIGINAL           |           15 |
-    
-* timestamp function <br/>
-    *The TIMESTAMP function is used to manipulate temporal values. more details: https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html*
-    ```sh
-    SELECT created_at,TIME(created_at),DAY(created_at),MONTH(created_at),YEAR(created_at) FROM products;
-    ```
-    | created_at | TIME(created_at) | DAY(created_at) | MONTH(created_at) | YEAR(created_at) |
-    | :---: | :---: | :---: | :---: | :---: |
-    | 2021-07-13 05:43:22 | 05:43:22         |              13 |                 7 |             2021 |
-    | 2021-07-13 05:43:26 | 05:43:26         |              13 |                 7 |             2021 |
-    | 2021-07-13 05:43:26 | 05:43:26         |              13 |                 7 |             2021 |
-    | 2021-07-13 05:43:26 | 05:43:26         |              13 |                 7 |             2021 |
-    | 2021-07-13 06:19:02 | 06:19:02         |              13 |                 7 |             2021 |
-    | 2021-07-13 06:19:02 | 06:19:02         |              13 |                 7 |             2021 |
-    | 2021-07-13 06:19:02 | 06:19:02         |              13 |                 7 |             2021 |
-    | 2021-07-13 06:19:02 | 06:19:02         |              13 |                 7 |             2021 |
 
 <br />
 

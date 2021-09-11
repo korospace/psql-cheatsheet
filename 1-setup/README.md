@@ -20,14 +20,14 @@
 
 ## login 
   ```
-    psql -h localhost -U postgres;
+  psql -h localhost -U postgres;
   ```
 
 <br />
 
 ## exit 
   ```
-    \q
+  \q
   ```
 
 <br />
