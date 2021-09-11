@@ -20,7 +20,12 @@
   ```
   pg_dump -U USERNAME -h 127.0.0.1 DATABASE_NAME > /path/path/path/file_name.sql
   ```
+
+<br />
+
 ## restore database
   ```
   psql -U USERNAME -h 127.0.0.1 DATABASE_NAME < /path/path/path/file_name.sql
   ```
+
+<br />

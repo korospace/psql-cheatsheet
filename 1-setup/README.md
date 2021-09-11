@@ -19,16 +19,16 @@
 </details>
 
 ## login 
-    ```sh
+  ```
     psql -h localhost -U postgres;
-    ```
+  ```
 
 <br />
 
 ## exit 
-    ```sh
-    \q;
-    ```
+  ```
+    \q
+  ```
 
 <br />
 
