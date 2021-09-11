@@ -15,6 +15,20 @@
     <li><a href="#basic-select">basic select</a></li>
     <li><a href="#alias">alias</a></li>
     <li><a href="#arithmetic-operation">arithmetic operation</a></li>
+    <li><a href="#concat-column">concat column</a></li>
+    <li><a href="#redundant-data">redundant data</a></li>
+    <li><a href="#date-operation">date operation</a></li>
+    <li><a href="#timestamp-operation">timestamp operation</a></li>
+    <li><a href="#null-and-empty-handler">NULL and EMPTY handler</a></li>
+    <li><a href="#logical-operation">logical operation</a></li>
+    <li><a href="#ordering-data">ordering data</a></li>
+    <li><a href="#limit-and-offset">limit and offset</a></li>
+    <li><a href="#single-row-funciton">single row funciton</a></li>
+    <li><a href="#group-by">group by</a></li>
+    <li><a href="#having-clause">having clause</a></li>
+    <li><a href="#join">join</a></li>
+    <li><a href="#case">case</a></li>
+
   </ul>
 </details>
 
@@ -28,6 +42,7 @@
     ```sh
     SELECT column_name,column_name FROM table_name
     ```
+<br>
 
 ## alias
 * alias for column
@@ -49,7 +64,6 @@
 
     SELECT tn.column_name FROM table_name tn;
     ```
-
 <br />
 
 ## arithmetic operation
@@ -71,8 +85,224 @@
         salary*(30/100) AS "30% dari gaji" 
     FROM employees;
     ```
+<br />
+
+## concat column
+* static data
+    ```sh
+    SELECT 
+        first_name,
+        last_name, 
+        first_name ||' '|| last_name AS full_name 
+    FROM employees;
+    ```
+<br />
+
+## redundant data
+* one column
+    ```sh
+    SELECT 
+        distinct job_id,
+        first_name
+    FROM employees;
+    ```
+
+* two column or more
+    ```sh
+    SELECT
+        distinct (department_id,salary),
+        first_name
+    from employees;
+    ```
+<br />
+
+## date operation
+* type data is string
+    ```sh
+    SELECT
+        DATE '2017-03-28' - 2 AS lusa, 
+        DATE '2017-03-28' - interval '2 hour' AS waktu, 
+        DATE '2017-03-28' + 1 AS besok,
+        DATE '2017-03-30' - DATE '2017-03-15' AS jumlah_hari_kerja;
+    ```
+    | lusa | waktu | besok | jumlah_hari_kerja |
+    | :---: | :---: | :---: | :---: |
+    | 2017-03-26 | 2017-03-27 22:00:00 | 2017-03-29 | 15 |
+
+* type data is timestamp/date
+    ```sh
+    SELECT 
+        start_date - end_date AS "lama kerja" 
+    FROM job_history; 
+    ```
+    | lama kerja |
+    | :---: |
+    | -2018 days |
+    | -1497 days |
+    | -1234 days |
+    | -1401 days |
 
 <br />
+
+## timestamp operation
+```sh
+SELECT
+    TIMESTAMP '2017-03-28 18:20:00' - interval '15 hour'   AS waktu, 
+    DATE      '2017-03-28'          + interval '26 day'    AS deadline, 
+    TIMESTAMP '2017-03-02 00:04:30' + interval '5 minutes' AS makan_siang;
+```
+<br>
+|  waktu        |      deadline       |     makan_siang |
+| :---: | :---: | :---: |
+| 2017-03-28 03:20:00 | 2017-04-23 00:00:00 | 2017-03-02 00:09:30|
+<br />
+
+## null and empty handler
+```sh
+SELECT 
+    COALESCE(commission_pct,0), 
+    salary 
+FROM employees;
+```
+***this keyword selects records that have matching values in both tables.***
+<br>
+
+## where clause
+* ( = )
+    ```sh
+    //type integer
+    SELECT * FROM countries WHERE region_id = 2;
+
+    //type string
+    SELECT * FROM countries WHERE country_id = 'CN';
+    ```
+* ( != )
+    ```sh
+    //type integer
+    SELECT * FROM countries WHERE region_id != 2;
+
+    //type string
+    SELECT * FROM countries WHERE country_id <> 'CN';
+    ```
+* IN
+    ```sh
+    SELECT * FROM countries WHERE region_id IN (1,2);
+    ```
+* BETWEEN
+    ```sh
+    SELECT 
+        salary 
+    FROM employees 
+    WHERE salary BETWEEN 1000 AND 4000;
+    ```
+* IS NULL
+    ```sh
+    SELECT 
+        first_name||' '||last_name AS employers 
+    FROM employees 
+    WHERE commission_pct IS NULL;
+    ```
+* LIKE
+    ```sh
+    //
+    SELECT * from employees where first_name like 'A%';
+
+    //
+    SELECT * from employees where first_name like '_l%';
+    ```
+<br />
+
+## logical operation
+* AND
+    ```sh
+    SELECT first_name FROM employees WHERE department_id = 90 AND manager_id = 100;
+    ```
+* OR
+    ```sh
+    SELECT first_name FROM employees WHERE department_id = 90 OR manager_id = 100;
+    ```
+* COMBINATION
+    ```sh
+    SELECT * FROM employees WHERE (salary > 10000 OR commission_pct > 1000) AND department_id = 90;
+    ```
+* NOT
+    ```sh
+    SELECT * FROM countries WHERE region_id NOT IN (1,2);
+
+    SELECT first_name FROM employees WHERE salary NOT BETWEEN 1000 AND 10000;
+
+    SELECT first_name FROM employees WHERE commission_pct IS NOT NULL
+
+    SELECT first_name FROM employees WHERE first_name NOT LIKE '%el%'
+    ```
+<br />
+
+## ordering data
+```sh
+//ASCENDING
+SELECT first_name,salary FROM employees ORDER BY salary DESC;
+
+//DESCENDING
+SELECT first_name,salary FROM employees ORDER BY (first_name,salary) ASC;
+```
+<br>
+
+## limit and offset
+```sh
+SELECT * FROM employees LIMIT 10 OFFSET 2;
+```
+<br>
+
+## single row funciton
+```sh
+SELECT
+    employee_id                        AS kode,
+    UPPER(first_name)                  AS nama_depan_kapital,
+    INITCAP(last_name)                 AS nama_belakang,
+    LENGTH(last_name)                  AS jumlah,
+    CONACT(first_name, ' ', last_name) AS nama_lengkap
+FROM employees;
+```
+<br>
+
+## group by
+```sh
+SELECT 
+    department_id      AS divisi,
+    manager_id         AS manager,
+    COUNT(*)           AS jumlah_karyawan,
+    (SUM(salary) * 12) AS total_salary
+FROM employees
+GROUP BY divisi, manager
+ORDER BY divisi;
+```
+<br>
+
+## having clause
+* having
+    ```sh
+    SELECT 
+        manager_id,
+        COUNT(*) AS jumlah_karyawan,
+        SUM(salary)
+    FROM employees
+    GROUP BY manager_id
+        HAVING SUM(salary) >= 20000
+    ORDER BY manager_id;
+    ```
+* where and having
+    ```sh
+    SELECT 
+        manager_id,
+        COUNT(*) AS jumlah_karyawan, 
+        SUM(salary)
+    FROM employees 
+        WHERE salary >= 10000
+    GROUP BY manager_id
+        HAVING SUM(salary) >= 20000
+    ORDER BY manager_id;
+    ```
+<br>
 
 ## agregat
 * count
@@ -117,409 +347,85 @@
 
 <br />
 
-## where clause
-* = , !=
-    ```sh
-    SELECT * FROM products WHERE quantity != 10;
-    ```
-* < , > , <= , >=
-    ```sh
-    SELECT * FROM products WHERE price > 10000;
-    ```
-* AND , OR
-    ```sh
-    SELECT * FROM products WHERE price < 20000 AND quantity > 10;
-    ```
-* ( ) operator
-    ```sh
-    SELECT * FROM products WHERE (price > 10000 AND quantity > 10) OR price < 29000;
-    ```
-* IS NULL operator
-    ```sh
-    SELECT * FROM products WHERE column_name IS NULL;
-    ```
-* BETWEEN , NOT BETWEEN
-    ```sh
-    SELECT * FROM products WHERE quantity NOT BETWEEN 10 AND 40;
-    ```
-* IN , NOT IN
-    ```sh
-    SELECT * FROM products WHERE price NOT IN(10000,12000);
-    ```
-<br />
-
-## controll flow
-* IFNULL 
-    ```sh
-    SELECT category_id AS 'without IFNULL', 
-           IFNULL(category_id,'not found') AS 'with IFNULL'
-    FROM products;
-    ```
-    | without IFNULL | with IFNULL |
-    | :---: | :---: |
-    |              1 | 1           |
-    |              1 | 1           |
-    |              1 | 1           |
-    |              1 | 1           |
-    |              2 | 2           |
-    |              2 | 2           |
-    |              2 | 2           |
-    |              3 | 3           |
-    |           NULL | not found   |
-    |           NULL | not found   |
-    
-* IF 
-    ```sh
-    SELECT quantity AS 'stock',
-           IF( quantity <= 10,'low stock', 
-                IF( quantity <= 40 ,'ready stock', 
-                    IF( quantity > 40, 'over stock','over over stock'))) 
-                        AS 'stock level' 
-    FROM products;
-    ```
-    | stock | stock level |
-    | :---: | :---: |
-    |    40 | ready stock |
-    |    50 | over stock  |
-    |    10 | low stock   |
-    |    80 | over stock  |
-    |    10 | low stock   |
-    |    10 | low stock   |
-    |    10 | low stock   |
-    |    10 | low stock   |
-    |    23 | ready stock |
-    |    28 | ready stock |
-    
-* case
-    ```sh
-    SELECT quantity AS 'stock', 
-        CASE quantity 
-            WHEN 10 THEN 'low stock' 
-            WHEN 23 THEN 'ready stock' 
-            WHEN 28 THEN 'ready stock' 
-            ELSE 'over stock' 
-        END AS 'stock level' 
-    FROM products;
-    ```
-    | stock | stock level |
-    | :---: | :---: |
-    |    40 | over stock  |
-    |    50 | over stock  |
-    |    10 | low stock   |
-    |    80 | over stock  |
-    |    10 | low stock   |
-    |    10 | low stock   |
-    |    10 | low stock   |
-    |    10 | low stock   |
-    |    23 | ready stock |
-    |    28 | ready stock |
-
-<br />
-
-## group by
-*   The GROUP BY statement groups rows that have the same values into summary rows
-    ```sh
-    SELECT price AS 'price group' , 
-           COUNT(product_id) AS 'total product' 
-    FROM products 
-    GROUP BY price;
-    ```
-    | price group | total product |
-    | :---: | :---: |
-    |       10000 |             6 |
-    |       11000 |             1 |
-    |       12000 |             1 |
-    |       22000 |             1 |
-    |       29000 |             1 |
-<br />
-
-## having clause
-*   The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions.
-    ```sh
-    SELECT price AS 'price group' , 
-           COUNT(product_id) AS total_product 
-    FROM products 
-    GROUP BY price
-    HAVING total_product > 1;
-    ```
-    | price group | total product |
-    | :---: | :---: |
-    |       10000 |             6 |
-<br />
-
-## sub queries
-*   ```sh
-    SELECT name,price,category_id 
-    FROM products 
-    WHERE price = (
-        SELECT MAX(price) 
-        FROM products
-    );
-    ```
-    | name                | price | category_id |
-    | :---: | :---: | :---: |
-    | Ayam bakar Bu Mirna | 30000 |        NULL |
-
-*   ```sh
-    SELECT name,price,category_id 
-    FROM products 
-    WHERE price = (
-        SELECT MAX(price) 
-        FROM products 
-        JOIN categories 
-        ON (products.category_id = categories.category_id)
-    );
-    ```
-    | name            | price | category_id |
-    | :---: | :---: | :---: |
-    | Rondoleti wafer | 29000 |           1 |
-
-*   ```sh
-    SELECT MAX(price) 
-    FROM (
-        SELECT price 
-        FROM products 
-        JOIN categories 
-        ON (products.category_id = categories.category_id)
-    ) AS product_categories;
-    ```
-    | MAX(price) |
-    | :---: |
-    |      29000 |
-<br />
-
 ## join
-* inner join / join
-    <br/>
-    ***this keyword selects records that have matching values in both tables.***
+* natural join
     ```sh
-    SELECT products.category_id   AS 'from products',
-           categories.category_id AS 'from categories' 
-    FROM products 
-    INNER JOIN categories 
-    ON (products.category_id =categories. category_id);
+    SELECT 
+        c.country_name, 
+        l.street_address 
+    from countries c 
+    natural join locations l;
     ```
-    | from products | from categories |
-    | :---: | :---: |
-    | C01           | C01             |
-    | C01           | C01             |
-    | C01           | C01             |
-    | C01           | C01             |
-    | C02           | C02             |
-    | C02           | C02             |
-    | C02           | C02             |
-    | C03           | C03             |
     
-* left join
-    <br/>
-    ***this keyword returns all records from the left table (table1), and the matching records from the right table (table2). The result is 0 records from the right side, if there is no match.***
+* inner join
     ```sh
-    SELECT products.category_id   AS 'from products',
-           categories.category_id AS 'from categories' 
-    FROM products 
-    LEFT JOIN categories 
-    ON (products.category_id =categories. category_id);
+    SELECT 
+        dep.manager_id,
+        dep.department_name,
+        em.first_name,
+        em.salary 
+    FROM departments dep 
+    JOIN employees   em 
+    ON(dep.manager_id = em.employee_id);
+
+    //manual
+    SELECT 
+        dep.manager_id,
+        dep.department_name,
+        em.first_name,
+        em.salary 
+    FROM departments dep,employees em 
+    WHERE dep.manager_id = em.employee_id;
     ```
-    | from products | from categories |
-    | :---: | :---: |
-    | C01           | C01             |
-    | C01           | C01             |
-    | C01           | C01             |
-    | C01           | C01             |
-    | C02           | C02             |
-    | C02           | C02             |
-    | C02           | C02             |
-    | C03           | C03             |
-    | C099          | NULL            |
-    | C099          | NULL            |
     
-* right join
-    <br/>
-    ***THIS keyword returns all records from the right table (table2), and the matching records from the left table (table1). The result is 0 records from the left side, if there is no match.***
+* outer join
     ```sh
-    SELECT products.category_id 
-    FROM products 
-    RIGHT JOIN categories 
-    ON (products.category_id = categories.category_id);
+    //right join
+    SELECT 
+        dep.manager_id,
+        dep.department_name,
+        em.first_name,
+        em.salary 
+    FROM departments     dep 
+    RIGHT JOIN employees em 
+    ON(dep.manager_id = em.employee_id);
+
+    //left join
+    SELECT 
+        dep.manager_id,
+        dep.department_name,
+        em.first_name,
+        em.salary 
+    FROM departments    dep 
+    LEFT JOIN employees em 
+    ON(dep.manager_id = em.employee_id);
     ```
-    | from products | from categories |
-    | :---: | :---: |
-    | C01           | C01             |
-    | C01           | C01             |
-    | C01           | C01             |
-    | C01           | C01             |
-    | C02           | C02             |
-    | C02           | C02             |
-    | C02           | C02             |
-    | C03           | C03             |
-    | NULL          | C04             |
-    | NULL          | C05             |
     
-* cross join
-    <br/>
-    ***The SQL CROSS JOIN produces a result set which is the number of rows in the first table multiplied by the number of rows in the second table.***
+* self join
     ```sh
-    SELECT products.category_id   AS 'from products',            
-           categories.category_id AS 'from categories'      
-    FROM products      
-    CROSS JOIN categories;
+    SELECT 
+        em.employee_id,
+        CONCAT(em.first_name,' ',em.last_name) as employee_name,
+        man.manager_id, 
+        CONCAT(man.first_name,' ',man.last_name) as manager_name 
+    FROM employees      em 
+    LEFT JOIN employees man 
+    ON(man.employee_id = em.manager_id);
     ```
-    | from products | from categories |
-    | :---: | :---: |
-    | C01           | C01             |
-    | C01           | C02             |
-    | C01           | C03             |
-    | C01           | C04             |
-    | C01           | C05             |
-    | C01           | C01             |
-    | C01           | C02             |
-    | C01           | C03             |
-    | C01           | C04             |
-    | C01           | C05             |
-    | C01           | C01             |
-    | C01           | C02             |
-    | C01           | C03             |
-    | C01           | C04             |
-    | C01           | C05             |
-    | C01           | C01             |
-    | C01           | C02             |
-    | C01           | C03             |
-    | C01           | C04             |
-    | C01           | C05             |
-    | C02           | C01             |
-    | C02           | C02             |
-    | C02           | C03             |
-    | C02           | C04             |
-    | C02           | C05             |
-    | C02           | C01             |
-    | C02           | C02             |
-    | C02           | C03             |
-    | C02           | C04             |
-    | C02           | C05             |
-    | C02           | C01             |
-    | C02           | C02             |
-    | C02           | C03             |
-    | C02           | C04             |
-    | C02           | C05             |
-    | C03           | C01             |
-    | C03           | C02             |
-    | C03           | C03             |
-    | C03           | C04             |
-    | C03           | C05             |
-    | C099          | C01             |
-    | C099          | C02             |
-    | C099          | C03             |
-    | C099          | C04             |
-    | C099          | C05             |
-    | C099          | C01             |
-    | C099          | C02             |
-    | C099          | C03             |
-    | C099          | C04             |
-    | C099          | C05             |
     <br />
-## union
-* union
-    ```sh
-    SELECT category_id FROM products UNION SELECT category_id FROM categories;
-    ```
-    | category_id (table products) | category_id (table categoires) | UNION |
-    | :---: | :---: | :---: |
-    |         C01 |         C01 |         C01 |
-    |         C01 |         C02 |         C02 |
-    |         C01 |         C03 |         C03 |
-    |         C01 |             |        NULL |
-    |         C02 |
-    |         C02 |
-    |         C02 |
-    |         C03 |
-    |        NULL |
-    |        NULL |
 
-* union all
-    ```sh
-    SELECT category_id FROM products UNION ALL SELECT category_id FROM categories;
-    ```
-    | category_id (table products) | category_id (table categoires) | UNION ALL |
-    | :---: | :---: | :---: |
-    |         C01 |         C01 |         C01 |
-    |         C01 |         C02 |         C01 |
-    |         C01 |         C03 |         C01 |
-    |         C01 |             |         C01 |
-    |         C02 |             |         C02 |
-    |         C02 |             |         C02 |
-    |         C02 |             |         C02 |
-    |         C03 |             |         C03 |
-    |        NULL |             |        NULL |
-    |        NULL |             |        NULL |
-    |             |             |         C01 |
-    |             |             |         C02 |
-    |             |             |         C03 |
-
-* intersect
-    <br/>
-    using sub query
-    ```sh
-    SELECT category_id 
-    FROM products 
-    WHERE category_id IN (
-        SELECT category_id 
-        FROM categories
-    );
-    ```
-    _or_
-    <br />
-    using join    
-    ```sh
-    SELECT products.category_id 
-    FROM products 
-    JOIN categories 
-    ON (products.category_id = categories.category_id);
-    ```
-    | category_id (table products) | category_id (table categoires) | INSTERSECT |
-    | :---: | :---: | :---: |
-    |         C01 |         C01 |         C01 |
-    |         C01 |         C02 |         C01 |
-    |         C01 |         C03 |         C01 |
-    |         C01 |             |         C01 |
-    |         C02 |             |         C02 |
-    |         C02 |             |         C02 |
-    |         C02 |             |         C02 |
-    |         C03 |             |         C03 |
-    |        NULL |             |
-    |        NULL |             |
-
-* minus
-    <br/>
-    using sub query
-    ```sh
-    SELECT category_id 
-    FROM products 
-    WHERE category_id NOT IN (
-        SELECT category_id 
-        FROM categories
-    );
-    ```
-    _or_
-    <br />
-    using left join    
-    ```sh
-    SELECT products.category_id 
-    FROM products 
-    LEFT JOIN categories 
-    ON (products.category_id = categories.category_id ) 
-    WHERE categories.category_id IS NULL;
-    ```
-    | category_id (table products) | category_id (table categoires) | INSTERSECT |
-    | :---: | :---: | :---: |
-    |         CO1 |         CO1 |        CO99 |
-    |         CO1 |         C02 |        CO99 |
-    |         CO1 |         C03 |         
-    |         CO1 |             |         
-    |         C02 |             |         
-    |         C02 |             |         
-    |         C02 |             |         
-    |         C03 |             |         
-    |        NULL |             |
-    |        NULL |             |
-
-    <br />
+## case
+```sh
+SELECT
+    employee_id    AS kode_karyawan,
+    commission_pct AS besar_komisi,
+    CASE    
+        WHEN COALESCE(commission_pct, 0) = 0 
+            THEN 'Tidak memiliki komisi'
+        ELSE
+            CONCAT('Memiliki komisi sebesar ', commission_pct)
+    end as deskripsi
+FROM 
+    employees;
+```
+<br>
