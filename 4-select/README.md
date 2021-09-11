@@ -28,7 +28,6 @@
     <li><a href="#having-clause">having clause</a></li>
     <li><a href="#join">join</a></li>
     <li><a href="#case">case</a></li>
-
   </ul>
 </details>
 

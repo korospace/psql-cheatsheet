@@ -27,6 +27,22 @@
 </details>
   <summary><a href="4-select/README.md">select data</a></summary>
   <ul>
+    <li><a href="4-select/README.md/#basic-select">basic select</a></li>
+    <li><a href="4-select/README.md/#alias">alias</a></li>
+    <li><a href="4-select/README.md/#arithmetic-operation">arithmetic operation</a></li>
+    <li><a href="4-select/README.md/#concat-column">concat column</a></li>
+    <li><a href="4-select/README.md/#redundant-data">redundant data</a></li>
+    <li><a href="4-select/README.md/#date-operation">date operation</a></li>
+    <li><a href="4-select/README.md/#timestamp-operation">timestamp operation</a></li>
+    <li><a href="4-select/README.md/#null-and-empty-handler">NULL and EMPTY handler</a></li>
+    <li><a href="4-select/README.md/#logical-operation">logical operation</a></li>
+    <li><a href="4-select/README.md/#ordering-data">ordering data</a></li>
+    <li><a href="4-select/README.md/#limit-and-offset">limit and offset</a></li>
+    <li><a href="4-select/README.md/#single-row-funciton">single row funciton</a></li>
+    <li><a href="4-select/README.md/#group-by">group by</a></li>
+    <li><a href="4-select/README.md/#having-clause">having clause</a></li>
+    <li><a href="4-select/README.md/#join">join</a></li>
+    <li><a href="4-select/README.md/#case">case</a></li>
   </ul>
 </details>
 <details close="close">
