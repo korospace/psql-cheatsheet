@@ -159,7 +159,7 @@ SELECT
 <br />
 
 ## null and empty handler
-***this keyword selects records that have matching values in both tables.***wc 
+***this keyword selects records that have matching values in both tables.***
 ```sh
 SELECT 
     COALESCE(commission_pct,0), 
