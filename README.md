@@ -25,6 +25,7 @@
     <li><a href="1-setup/README.md/#create-new-role">create new role</a></li>
   </ul>
 </details>
+<details close="close">
   <summary><a href="4-select/README.md">select data</a></summary>
   <ul>
     <li><a href="4-select/README.md/#basic-select">basic select</a></li>

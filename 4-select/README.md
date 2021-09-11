@@ -20,6 +20,7 @@
     <li><a href="#date-operation">date operation</a></li>
     <li><a href="#timestamp-operation">timestamp operation</a></li>
     <li><a href="#null-and-empty-handler">NULL and EMPTY handler</a></li>
+    <li><a href="#where-clause">where clause</a></li>
     <li><a href="#logical-operation">logical operation</a></li>
     <li><a href="#ordering-data">ordering data</a></li>
     <li><a href="#limit-and-offset">limit and offset</a></li>
@@ -31,7 +32,7 @@
   </ul>
 </details>
 
-## select data
+## basic select
 * All column. 
     ```sh
     SELECT * FROM table_name;
@@ -87,14 +88,13 @@
 <br />
 
 ## concat column
-* static data
-    ```sh
-    SELECT 
-        first_name,
-        last_name, 
-        first_name ||' '|| last_name AS full_name 
-    FROM employees;
-    ```
+```sh
+SELECT 
+    first_name,
+    last_name, 
+    first_name ||' '|| last_name AS full_name 
+FROM employees;
+```
 <br />
 
 ## redundant data
@@ -151,19 +151,21 @@ SELECT
     TIMESTAMP '2017-03-02 00:04:30' + interval '5 minutes' AS makan_siang;
 ```
 <br>
+
 |  waktu        |      deadline       |     makan_siang |
 | :---: | :---: | :---: |
 | 2017-03-28 03:20:00 | 2017-04-23 00:00:00 | 2017-03-02 00:09:30|
+
 <br />
 
 ## null and empty handler
+***this keyword selects records that have matching values in both tables.***wc 
 ```sh
 SELECT 
     COALESCE(commission_pct,0), 
     salary 
 FROM employees;
 ```
-***this keyword selects records that have matching values in both tables.***
 <br>
 
 ## where clause
