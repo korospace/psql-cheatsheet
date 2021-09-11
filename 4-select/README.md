@@ -255,6 +255,8 @@ SELECT * FROM employees LIMIT 10 OFFSET 2;
 <br>
 
 ## single row funciton
+<a hrfe="https://youtube.dimas-maryanto.com/posts/rdbms/postgresql/010-single-row-function">documentation</a>
+
 ```sh
 SELECT
     employee_id                        AS kode,
@@ -264,8 +266,6 @@ SELECT
     CONACT(first_name, ' ', last_name) AS nama_lengkap
 FROM employees;
 ```
-<br>
-<a hrfe="https://youtube.dimas-maryanto.com/posts/rdbms/postgresql/010-single-row-function">documentation</a>
 <br>
 
 ## group by

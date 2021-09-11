@@ -26,6 +26,14 @@
   </ul>
 </details>
 <details close="close">
+  <summary><a href="3-dml/README.md">DML (Data Manipulation Language)</a></summary>
+  <ul>
+    <li><a href="3-dml/README.md/#insert-data">insert data</a></li>
+    <li><a href="3-dml/README.md/#update-data">update data</a></li>
+    <li><a href="3-dml/README.md/#delete-data">delete data</a></li>
+  </ul>
+</details>
+<details close="close">
   <summary><a href="4-select/README.md">select data</a></summary>
   <ul>
     <li><a href="4-select/README.md/#basic-select">basic select</a></li>

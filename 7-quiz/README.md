@@ -32,9 +32,7 @@
             ELSE
                 TO_CHAR(em.salary*em.commission_pct,'FM999,999,999')
         end AS komisi
-    FROM employees   em
-    JOIN departments dep 
-    ON(em.department_id = dep.department_id);
+    FROM employees em JOIN departments dep ON(em.department_id = dep.department_id);
     ```
 
 * no.2
