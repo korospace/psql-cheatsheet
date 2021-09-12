@@ -65,7 +65,7 @@ DROP TABLE test_table;
 ```
 <br />
 
-## schema
+## alter table
 * add column
     ```
     ALTER TABLE test_table ADD COLUMN test_column integer;
