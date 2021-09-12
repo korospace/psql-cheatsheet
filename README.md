@@ -26,6 +26,11 @@
   </ul>
 </details>
 <details close="close">
+  <summary><a href="2-ddl/README.md">DDL (Data Definition Language)</a></summary>
+  <ul>
+  </ul>
+</details>
+<details close="close">
   <summary><a href="3-dml/README.md">DML (Data Manipulation Language)</a></summary>
   <ul>
     <li><a href="3-dml/README.md/#insert-data">insert data</a></li>
