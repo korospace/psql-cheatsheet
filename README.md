@@ -28,6 +28,14 @@
 <details close="close">
   <summary><a href="2-ddl/README.md">DDL (Data Definition Language)</a></summary>
   <ul>
+    <li><a href="2-ddl/README.md/#schema">schema</a></li>
+    <li><a href="2-ddl/README.md/#create-table">create table</a></li>
+    <li><a href="2-ddl/README.md/#drop-table">drop table</a></li>
+    <li><a href="2-ddl/README.md/#alter-table">alter table</a></li>
+    <li><a href="2-ddl/README.md/#constraint">constraint</a></li>
+    <li><a href="2-ddl/README.md/#drop-constraint">drop constraint</a></li>
+    <li><a href="2-ddl/README.md/#auto-increment">auto increment</a></li>
+    <li><a href="2-ddl/README.md/#unique-identifier">unique identifier</a></li>
   </ul>
 </details>
 <details close="close">
