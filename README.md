@@ -68,15 +68,15 @@
   </ul>
 </details>
 <details close="close">
-  <summary><a href="6-manymore/README.md/">many more</a></summary>
+  <summary><a href="5-manymore/README.md/">many more</a></summary>
   <ul>
-    <li><a href="6-manymore/README.md/#backup-database">backup database</a></li>
-    <li><a href="6-manymore/README.md/#restore-database">restore database</a></li>
+    <li><a href="5-manymore/README.md/#backup-database">backup database</a></li>
+    <li><a href="5-manymore/README.md/#restore-database">restore database</a></li>
   </ul>
 </details>
 <details close="close">
-  <summary><a href="7-quiz/README.md/">quiz</a></summary>
+  <summary><a href="6-quiz/README.md/">quiz</a></summary>
   <ul>
-    <li><a href="7-quiz/README.md/#quiz-1">quiz 1</a></li>
+    <li><a href="6-quiz/README.md/#quiz-1">quiz 1</a></li>
   </ul>
 </details>
