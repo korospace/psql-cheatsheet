@@ -32,6 +32,13 @@
           (7,'Thailand'),
           (8,'Brunei Darusalaam');
     ```
+* Arithmetic
+    ```sh
+    INSERT INTO table_name VALUES(1,14%4);
+    INSERT INTO table_name VALUES(2,2^3);
+    INSERT INTO table_name VALUES(3,5!);
+    INSERT INTO table_name VALUES(4,|/25);
+    ```
 <br />
 
 ## update data

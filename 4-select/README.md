@@ -1,4 +1,3 @@
-
 <p align="center">
     <h1 align="center">SELECT DATA</h1>
     <p align="center">
@@ -29,6 +28,8 @@
     <li><a href="#having-clause">having clause</a></li>
     <li><a href="#join">join</a></li>
     <li><a href="#case">case</a></li>
+    <li><a href="#show-query-speed">show query speed</a></li>
+    <li><a href="#view">view</a></li>
   </ul>
 </details>
 
@@ -171,18 +172,18 @@ FROM employees;
 ## where clause
 * ( = )
     ```sh
-    //type integer
+    # type integer
     SELECT * FROM countries WHERE region_id = 2;
 
-    //type string
+    # type string
     SELECT * FROM countries WHERE country_id = 'CN';
     ```
 * ( != )
     ```sh
-    //type integer
+    # type integer
     SELECT * FROM countries WHERE region_id != 2;
 
-    //type string
+    # type string
     SELECT * FROM countries WHERE country_id <> 'CN';
     ```
 * IN
@@ -205,11 +206,14 @@ FROM employees;
     ```
 * LIKE
     ```sh
-    //any word that has the letter A as the first letter
+    # any word that has the letter A as the first letter
     SELECT * from employees where first_name like 'A%';
 
-    //any word that has the letter L as the second letter
+    # any word that has the letter L as the second letter
     SELECT * from employees where first_name like '_l%';
+
+    SELECT * from employees where first_name like 'a_%_%_%_%_';
+
     ```
 <br />
 
@@ -240,10 +244,10 @@ FROM employees;
 
 ## ordering data
 ```sh
-//ASCENDING
+# ASCENDING
 SELECT first_name,salary FROM employees ORDER BY salary DESC;
 
-//DESCENDING
+# DESCENDING
 SELECT first_name,salary FROM employees ORDER BY (first_name,salary) ASC;
 ```
 <br>
@@ -371,7 +375,7 @@ ORDER BY divisi;
     JOIN employees   em 
     ON(dep.manager_id = em.employee_id);
 
-    //manual
+    # manual
     SELECT 
         dep.manager_id,
         dep.department_name,
@@ -383,7 +387,7 @@ ORDER BY divisi;
     
 * outer join
     ```sh
-    //right join
+    # right join
     SELECT 
         dep.manager_id,
         dep.department_name,
@@ -393,7 +397,7 @@ ORDER BY divisi;
     RIGHT JOIN employees em 
     ON(dep.manager_id = em.employee_id);
 
-    //left join
+    # left join
     SELECT 
         dep.manager_id,
         dep.department_name,
@@ -455,3 +459,17 @@ FROM
         e.salary > (select avg(j.max_salary) FROM jobs j)
     LIMIT 10;
     ```
+
+## show query speed
+```sh
+explain select * from table_name where column_name = value;
+```
+
+## view
+```sh
+#create view
+create tb_product_view as select name,quantity,price from tb_product;
+
+# call view
+select * from tb_product_view
+```
