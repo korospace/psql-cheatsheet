@@ -30,14 +30,21 @@
       <a href="#change-db-owner">change db owner</a>
     </li>
     <li>
+      <a href="#change-user-privilege">change user privilege</a>
+    </li>
+    <li>
       <a href="#switch-database">switch database owner</a>
     </li>
   </ul>
 </details>
 
 ## login 
-  ```
+  ```sh
   psql -U username -d db_name -h host -p port
+
+  # or
+
+  sudo -u postgres psql
   ```
   *default username,db_name and password is <b>postgres</b>
 
@@ -45,11 +52,12 @@
 
 ## shortcut
   ```
-    \q		-> quit
-	\l		-> database list
-	\du		-> user list
-	\! clear	-> clear window
-	\dt		-> table list
+    \q	     -> quit
+	\l		 -> database list
+	\du		 -> user list
+	\! clear   -> clear window
+	\dt		 -> table list
+	\d <table> -> table spesific      
   ```
 
 <br />
@@ -75,5 +83,11 @@
 ## switch database
   ```
   \c db_name username;
+  ```
+<br />
+
+## change user privilege
+  ```
+  ALTER USER role_specification WITH OPTION1 OPTION2 OPTION3;
   ```
 <br />
