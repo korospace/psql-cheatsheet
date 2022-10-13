@@ -17,7 +17,7 @@
 
 ## Table of Contents
 <details open="open">
-  <summary><a href="1-setup/README.md">get started</a></summary>
+  <summary><a href="1-get-started/README.md">get started</a></summary>
   <ul>
     <li><a href="1-setup/README.md/#login">login</a></li>
     <li><a href="1-setup/README.md/#login">exit</a></li>
