@@ -45,6 +45,10 @@
   # or
 
   sudo -u postgres psql
+
+  # remote database
+
+  psql -h db_host -U db_username -d db_name -p db_port
   ```
   *default username,db_name and password is <b>postgres</b>
 
