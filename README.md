@@ -17,12 +17,35 @@
 
 ## Table of Contents
 <details open="open">
-  <summary><a href="1-get-started/README.md">get started</a></summary>
+  <summary>Table of Contents</summary>
   <ul>
-    <li><a href="1-setup/README.md/#login">login</a></li>
-    <li><a href="1-setup/README.md/#login">exit</a></li>
-    <li><a href="1-setup/README.md/#change-password">change password</a></li>
-    <li><a href="1-setup/README.md/#create-new-role">create new role</a></li>
+    <li>
+      <a href="1-get-started/README.md/#login">login</a>
+    </li>
+    <li>
+      <a href="1-get-started/README.md/#shortcut">shortcut</a>
+    </li>
+    <li>
+      <a href="1-get-started/README.md/#create-user">create user</a>
+    </li>
+    <li>
+      <a href="1-get-started/README.md/#create-database">create database</a>
+    </li>
+    <li>
+      <a href="1-get-started/README.md/#create-database">create database</a>
+    </li>
+    <li>
+      <a href="1-get-started/README.md/#change-db-owner">change db owner</a>
+    </li>
+    <li>
+      <a href="1-get-started/README.md/#switch-database">switch database owner</a>
+    </li>
+    <li>
+      <a href="1-get-started/README.md/#change-password">change password</a>
+    </li>
+    <li>
+      <a href="1-get-started/README.md#change-user-privilege">change user privilege</a>
+    </li>
   </ul>
 </details>
 <details close="close">

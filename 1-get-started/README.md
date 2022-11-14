@@ -30,10 +30,13 @@
       <a href="#change-db-owner">change db owner</a>
     </li>
     <li>
-      <a href="#change-user-privilege">change user privilege</a>
+      <a href="#switch-database">switch database owner</a>
     </li>
     <li>
-      <a href="#switch-database">switch database owner</a>
+      <a href="#change-password">change password</a>
+    </li>
+    <li>
+      <a href="#change-user-privilege">change user privilege</a>
     </li>
   </ul>
 </details>
@@ -87,6 +90,12 @@
 ## switch database
   ```
   \c db_name username;
+  ```
+<br />
+
+## change password
+  ```
+  ALTER USER korospace WITH ENCRYPTED PASSWORD '031020'
   ```
 <br />
 
